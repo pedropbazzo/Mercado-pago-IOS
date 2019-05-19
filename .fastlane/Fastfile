@@ -1,0 +1,136 @@
+# This is the minimum version number required.
+# Update this, if you use features of a newer version
+fastlane_version "2.55.0"
+
+# Disable Fastlane crash reporting because we're using UI.* methods for our custom errors and those aren't Fastlane bugs.
+opt_out_usage
+
+# Require Fastlane's UI to handle log messages. To be sure which method you should use check: https://github.com/fastlane/fastlane/blob/master/fastlane_core/lib/fastlane_core/ui/interface.rb
+require 'fastlane_core/ui/ui.rb'
+
+
+before_all do
+    require 'rake'
+    require_relative 'helper/ci_helper.rb'
+end
+
+desc 'Start here, this lane goes through the different ones'
+lane :start_deploy do
+    
+    unless CIHelper::has_deploy_message?
+        UI.message '[!] User did not request a deploy'
+        next
+    end
+
+    deploy_lib
+end
+
+desc 'Deploy to Github And CocoaPods'
+lane :deploy_lib do
+    unless CIHelper::is_running_in_ci?
+        UI.error 'Not running in CI environment. Local run not yet supported'
+    end
+
+    UI.message 'Checking pod version'
+    # All submodules should have the same version, so I take the version from the first module
+    pod_version = CIHelper::spec_version()
+
+    # Checks if all conditions are met in in order to release de library
+    unless CIHelper::can_deploy_library?(pod_version)
+        UI.user_error! 'Fix above errors and try again'
+    end
+    UI.success 'Repo check complete'
+
+    # deploy_public
+    deploy_private
+
+end
+
+desc 'Publish public lib'
+lane :deploy_public do
+    
+    UI.message 'Checking public pod version'
+    # All submodules should have the same version, so I take the version from the first module
+    pod_version = CIHelper::spec_version()
+
+    if CIHelper::tag_already_exists(pod_version)
+        UI.user_error! "[!] A tag for version #{pod_version} already exists. Please change the version to public publish and try again\n"
+    end
+
+    UI.message "Creating release #{pod_version} in GitHub"
+    set_github_release(
+        repository_name: 'mercadopago/px-ios',
+        api_token: CIHelper::GITHUB_TOKEN,
+        name: "Release v#{pod_version}",
+        tag_name: "#{pod_version}",
+        description: CIHelper::get_release_notes,
+        commitish: CIHelper::get_base_branch)
+    UI.success 'Release created'
+
+    UI.message 'Publishing public pod'
+    pod_push(path: "MercadoPagoSDKV4.podspec", allow_warnings: true)
+    UI.success 'Pod publicly published successfully'
+    communicate_build_to_slack(
+      enviroment: "Public"
+    )
+
+end
+
+desc 'Publish private lib'
+lane :deploy_private do
+
+    #new_spec_path = "#{CIHelper::BUILD_DIR}/MercadoPagoSDKV4.podspec"
+    #unless File.exist?(new_spec_path)
+        #UI.user_error! "No private spec file found in: '#{new_spec_path}'"
+    #end
+    #File.rename new_spec_path, "#{CIHelper::BUILD_DIR}/MercadoPagoSDKV4.podspec"
+
+    UI.message 'Checking private pod version'
+    # All submodules should have the same version, so I take the version from the first module
+    pod_version = CIHelper::spec_version()
+
+    if CIHelper::tag_already_exists(pod_version)
+        UI.user_error! "[!] A tag for version #{pod_version} already exists. Please change the version to private publish and try again\n"
+    end
+
+    UI.message "Creating release #{pod_version} in GitHub"
+    set_github_release(
+        repository_name: 'mercadopago/px-ios',
+        api_token: CIHelper::GITHUB_TOKEN,
+        name: "Release Private v#{pod_version}",
+        tag_name: "#{pod_version}",
+        description: CIHelper::get_release_notes,
+        commitish: CIHelper::get_base_branch)
+    UI.success 'Release created'
+
+    UI.message 'Publishing private pod'
+    CIHelper::push_pod("MercadoPagoSDKV4")
+    UI.success 'Pod privately published successfully'
+    communicate_build_to_slack(
+      enviroment: "Private"
+    )
+
+end
+
+lane :communicate_build_to_slack do |options|
+    pod_version = CIHelper::spec_version()
+    slack(
+      message: "🕺 Lib de PX publicada 💃",
+      username: 'Release PX',
+      default_payloads: [:git_author],
+      attachment_properties: {
+        fields: [
+              {
+                title: "📲Lib Version Number",
+                value: pod_version
+              },{
+                title: "🚀Entorno",
+                value: options[:enviroment]
+              },{
+                title: "📝What´s new? RC Notes",
+                value: "https://github.com/mercadopago/px-ios/releases/tag/#{pod_version}"
+              }
+            ]
+      }
+    )
+  end

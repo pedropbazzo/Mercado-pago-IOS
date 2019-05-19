@@ -1,0 +1,88 @@
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Pods/
+  - MercadoPagoSDKTests/ #Sacar proyecto de tests por ahora
+  - MercadoPagoSDK/Services/
+  - MercadoPagoSDK/UI/PXCardSlider
+opt_in_rules:
+
+# Reglas custom de MELI
+  # - empty_count
+  # - explicit_init
+  # - closure_spacing
+  # - overridden_super_call
+  # - redundant_nil_coalescing
+  # - private_outlet
+  # - nimble_operator
+  # - attributes
+  # - operator_usage_whitespace
+  # - closure_end_indentation
+  # - first_where
+  # - prohibited_super_call
+  # - force_try
+  # - extension_access_modifier
+  # - sorted_imports
+
+# Nuestras reglas custom:
+  # - override_in_extension
+  # - implicitly_unwrapped_optional
+  # - conditional_returns_on_newline
+  # - explicit_top_level_acl
+  # - explicit_type_interface
+  # - explicit_acl
+  # - discouraged_optional_boolean
+  # - fatal_error_message
+  # - file_header 
+  # - literal_expression_end_indentation
+  # - implicit_return
+  # - private_action
+  # - private_unit_test
+  # - private_over_fileprivate
+  # - sorted_first_last
+  # - switch_case_on_newline
+  # - trailing_closure
+  # - unneeded_parentheses_in_closure_argument
+
+disabled_rules:
+  # - empty_count
+  - leading_whitespace
+  - line_length
+  - todo
+# configurable rules can be customized from this configuration file
+# binary rules can set their severity level
+# TODO: pasar a error
+force_try: warning
+force_unwrapping: warning
+force_cast: warning
+
+# Terminar de definir esto
+identifier_name:
+    min_length:
+      warning: 2
+    max_length:
+      warning: 55
+      error: 60
+    allowed_symbols:
+    - "_"
+    excluded:
+    - url
+    # - _description
+
+file_length:
+  warning: 900
+  error: 1200
+type_name:
+  min_length: 4 # only warning
+  max_length: # warning and error
+    warning: 40
+    error: 50
+  excluded: iPhone # excluded via string
+
+type_body_length:
+   warning: 300
+   error: 900
+function_body_length:
+   warning: 50
+   error: 100
+cyclomatic_complexity:
+   warning: 20
+   error: 35

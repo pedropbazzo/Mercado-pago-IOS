@@ -1,0 +1,96 @@
+
+/* Class = "UILabel"; text = "Crear Pago"; ObjectID = "3a7-qE-5Tl"; */
+"3a7-qE-5Tl.text" = "Crear Pago";
+
+/* Class = "UILabel"; text = "Formulario Simple"; ObjectID = "4Fc-oR-5Sp"; */
+"4Fc-oR-5Sp.text" = "Formulario Simple";
+
+/* Class = "UILabel"; text = "Mastercard terminada en 0604"; ObjectID = "4ee-6t-fxQ"; */
+"4ee-6t-fxQ.text" = "Mastercard terminada en 0604";
+
+/* Class = "UILabel"; text = "Nombre y apellido"; ObjectID = "5Z5-dy-kyL"; */
+"5Z5-dy-kyL.text" = "Nombre y apellido";
+
+/* Class = "UILabel"; text = "Selección de Banco"; ObjectID = "9Pu-DT-lAp"; */
+"9Pu-DT-lAp.text" = "Selección de Banco";
+
+/* Class = "UILabel"; text = "Monto a Pagar : $100"; ObjectID = "AHm-4u-Afr"; */
+"AHm-4u-Afr.text" = "Monto a Pagar : $100";
+
+/* Class = "UILabel"; text = "Iniciar Revisa y Confirma"; ObjectID = "B00-Kd-DTh"; */
+"B00-Kd-DTh.text" = "Iniciar Revisa y Confirma";
+
+/* Class = "UILabel"; text = "Tarjetas Guardadas"; ObjectID = "C70-Me-gJ3"; */
+"C70-Me-gJ3.text" = "Tarjetas Guardadas";
+
+/* Class = "UILabel"; text = "Codigo de seguridad"; ObjectID = "DrK-FI-She"; */
+"DrK-FI-She.text" = "Codigo de seguridad";
+
+/* Class = "UILabel"; text = "Selección de Cuotas"; ObjectID = "Icc-JL-Nzh"; */
+"Icc-JL-Nzh.text" = "Selección de Cuotas";
+
+/* Class = "UILabel"; text = "Administrador de Tarjetas"; ObjectID = "Kp4-W0-5dD"; */
+"Kp4-W0-5dD.text" = "Administrador de Tarjetas";
+
+/* Class = "UILabel"; text = "DNI"; ObjectID = "O0Z-0r-ccw"; */
+"O0Z-0r-ccw.text" = "DNI";
+
+/* Class = "UILabel"; text = "1 cuota de $100"; ObjectID = "Qj5-5h-Fbh"; */
+"Qj5-5h-Fbh.text" = "1 cuota de $100";
+
+/* Class = "UILabel"; text = "Documento"; ObjectID = "WQk-jN-ceK"; */
+"WQk-jN-ceK.text" = "Documento";
+
+/* Class = "UILabel"; text = "Componentes UI"; ObjectID = "Y4a-SV-Kaz"; */
+"Y4a-SV-Kaz.text" = "Componentes UI";
+
+/* Class = "UINavigationItem"; title = "Ejemplo"; ObjectID = "c4S-FQ-Fzf"; */
+"c4S-FQ-Fzf.title" = "Ejemplo";
+
+/* Class = "UILabel"; text = "Pagos con medios offline"; ObjectID = "e1g-if-xAL"; */
+"e1g-if-xAL.text" = "Pagos con medios offline";
+
+/* Class = "UINavigationItem"; title = "Pagar"; ObjectID = "fCn-mr-X0L"; */
+"fCn-mr-X0L.title" = "Pagar";
+
+/* Class = "UILabel"; text = "1 cuota de $100"; ObjectID = "gHN-1u-Rx7"; */
+"gHN-1u-Rx7.text" = "1 cuota de $100";
+
+/* Class = "UILabel"; text = "Seleccionar cuotas..."; ObjectID = "hSP-bh-YHh"; */
+"hSP-bh-YHh.text" = "Seleccionar cuotas...";
+
+/* Class = "UILabel"; text = "Checkout"; ObjectID = "lyI-DO-NvP"; */
+"lyI-DO-NvP.text" = "Checkout";
+
+/* Class = "UILabel"; text = "Skip Revisa y Confirma"; ObjectID = "mAe-9y-6yx"; */
+"mAe-9y-6yx.text" = "Skip Revisa y Confirma";
+
+/* Class = "UILabel"; text = "Fecha de expiración"; ObjectID = "pq1-Lt-O8T"; */
+"pq1-Lt-O8T.text" = "Fecha de expiración";
+
+/* Class = "UILabel"; text = "/"; ObjectID = "qGO-p1-jP1"; */
+"qGO-p1-jP1.text" = "/";
+
+/* Class = "UILabel"; text = "Mastercard terminada en 0604"; ObjectID = "qUn-dU-k2p"; */
+"qUn-dU-k2p.text" = "Mastercard terminada en 0604";
+
+/* Class = "UILabel"; text = "Servicios"; ObjectID = "rP8-1a-pPe"; */
+"rP8-1a-pPe.text" = "Servicios";
+
+/* Class = "UILabel"; text = "Pagos con cuotas"; ObjectID = "rP9-AH-erD"; */
+"rP9-AH-erD.text" = "Pagos con cuotas";
+
+/* Class = "UILabel"; text = "Numero de tarjeta"; ObjectID = "rop-Jx-R1E"; */
+"rop-Jx-R1E.text" = "Numero de tarjeta";
+
+/* Class = "UILabel"; text = "Mastercard"; ObjectID = "tDa-D2-1Tv"; */
+"tDa-D2-1Tv.text" = "Mastercard";
+
+/* Class = "UILabel"; text = "Selección de medio de pago simple"; ObjectID = "uEB-jC-5fC"; */
+"uEB-jC-5fC.text" = "Selección de medio de pago simple";
+
+/* Class = "UILabel"; text = "Mostrar Congrats"; ObjectID = "uJ9-TW-MCF"; */
+"uJ9-TW-MCF.text" = "Mostrar Congrats";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "xlP-76-ZaM"; */
+"xlP-76-ZaM.text" = "Label";

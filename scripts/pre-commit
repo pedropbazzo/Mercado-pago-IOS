@@ -1,0 +1,64 @@
+#!/bin/bash
+
+echo "Running tests ..."
+echo ""
+
+cd scripts
+./run_tests.sh
+
+RESULT=$?
+if test $RESULT -eq 0 
+then
+	echo ""
+	echo "-----------------"
+    echo "TESTS SUCCEEDED"
+else
+	echo "-----------------"
+	echo ""
+	echo "COMMIT FAILED"
+    echo "This commit has been aborted because test failed"
+    echo "If you want to skip this script run 'git commit --no-verify'"
+    exit  $RESULT
+fi
+# git stash pop -q
+cd ..
+
+	echo "-----------------"
+	echo ""
+    echo "Running Swiftlint ..."
+    echo ""
+
+SWIFTLINT_CONFIG_FILE='.swiftlint.yml'
+
+if [ ! -f "$SWIFTLINT_CONFIG_FILE" ]; then
+    MY_PATH=$(cd $(dirname $0); pwd)
+    SWIFTLINT_CONFIG_FILE="$MY_PATH/../../MercadoPagoSDK/.swiftlint.yml"
+    if [ ! -f "$SWIFTLINT_CONFIG_FILE" ]; then
+      echo "No se encontró el archivo de configuración ${SWIFTLINT_CONFIG_FILE}"
+      echo "El commit NO se cancelará, pero por favor agregá el archivo"
+      exit 0
+    fi
+fi
+
+swiftlint version > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+    echo "Instalando Swiftlint..."
+    brew install swiftlint
+    if [ $? -ne 0 ]; then
+      echo "No se pudo instalar Swiftlint. El commit NO se cancelará, pero por favor instalalo"
+      exit 0
+    fi
+fi
+
+git diff --cached --name-status | while read st file; do
+# skip deleted files
+if [ "$st" == 'D' ]; then continue; fi
+if [[ $file =~ \.swift$ ]]; then
+    swiftlint autocorrect --config "$SWIFTLINT_CONFIG_FILE" --path "${file}" --quiet 
+    git add "${file}"
+    #EVALUAR SALIDA
+    if [ $? -ne 0 ]; then
+      echo "Errores detectados por Swiftlint. El commit NO se cancelará... por favor revisá los errores!!!"
+    fi
+fi
+done
